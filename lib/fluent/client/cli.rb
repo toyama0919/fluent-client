@@ -26,7 +26,7 @@ module Fluent
         @core = Core.new
       end
 
-      desc '--post', 'fluentd_client.rb --post sometag --data id:1 name:toyama'
+      desc '--post', 'fluent-client --post sometag --data id:1 name:toyama'
       option :data, type: :hash, desc: 'config file', required: true
       option :time_key, type: :string, default: nil, desc: 'config file'
       def post(tag)
@@ -38,7 +38,7 @@ module Fluent
         end
       end
 
-      desc '-j [tag]', %(echo '{"hoge":"fuga"}' | fluentd_client.rb -j sometag)
+      desc '-j [tag]', %(echo '{"hoge":"fuga"}' | fluent-client -j sometag)
       def post_json(tag)
         results = parse_json(STDIN.read)
         results.each do |result|
@@ -46,12 +46,12 @@ module Fluent
         end
       end
 
-      desc '-i', 'echo -n hoge | fluentd_client.rb -i sometag'
+      desc '-i', 'echo -n hoge | fluent-client -i sometag'
       def stdin(tag)
         @logger.post(tag, message: STDIN.read)
       end
 
-      desc '-l', 'cat somefile | fluentd_client.rb -l sometag'
+      desc '-l', 'cat somefile | fluent-client -l sometag'
       def stdin_line(tag)
         STDIN.read.lines.each do |line|
           @logger.post(tag, message: line)
@@ -59,7 +59,7 @@ module Fluent
       end
 
       desc 'validate_parse [tag]',
-           'echo "2014-01-01 localhost test" | fluentd_client.rb validate_parse --format "/^(?<log_date>\d{4}-\d{2}-\d{2}) (?<host>[^ ]*) (?<huga>[^ ]*)$/"'
+           'echo "2014-01-01 localhost test" | fluent-client validate_parse --format "/^(?<log_date>\d{4}-\d{2}-\d{2}) (?<host>[^ ]*) (?<huga>[^ ]*)$/"'
       option :format, type: :string, default: nil, desc: 'format regexp', required: true
       option :time_format, type: :string, default: nil, desc: 'time format'
       option :keys, type: :string, default: nil, desc: 'time format'
