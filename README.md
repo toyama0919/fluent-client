@@ -35,6 +35,8 @@ fluentd command line utility
     #=> {"instance_id"=>"i-xxxxxxx", "name"=>"web04", "state"=>"running"}
     #=> {"instance_id"=>"i-xxxxxxx", "name"=>"batch01", "state"=>"running"}
 
+※ multiline not support
+
 ### post stdin csv file
 
     $ cat server.csv
