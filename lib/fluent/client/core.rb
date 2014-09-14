@@ -27,6 +27,7 @@ module Fluent
         parser = create_parser(format, time_format, keys)
         begin
           buffer.lines.each_with_index do |line, i|
+            line = line.strip
             parsed_time, parsed = parser.call(line)
             if parsed.nil?
               puts "format error! line #{i + 1} [#{line}]"
